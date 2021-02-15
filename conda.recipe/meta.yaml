@@ -1,0 +1,35 @@
+package:
+  name: pytjs
+  version: 0.0.1
+
+source:
+  path: ..
+
+build:
+  number: 0
+  script: python -m pip install . -vvv
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+
+  host:
+    - python
+    - pip
+    - pybind11 >=2.6.0
+
+  run:
+    - python
+
+
+test:
+  imports:
+    - python_example
+  source_files:
+    - tests
+  commands:
+    - python tests/test.py
+
+about:
+  summary: TJS2 interface to Python
+  license_file: LICENSE
