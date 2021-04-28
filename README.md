@@ -4,7 +4,13 @@
 
 This repository contains a Python interface to TJS2.  
 
-## Installation
+## Installation (from PyPI)
+
+```bash
+python3 -m pip install pytjs
+```
+
+## Installation (from source)
 
 First, clone this repository, including all submodules.  
 ```bash
@@ -12,7 +18,7 @@ git clone --recursive https://github.com/uyjulian/pytjs.git
 ```
 Now, you can run `pip install` on the repository path.  
 ```bash
-pip install ./pytjs
+python3 -m pip install ./pytjs
 ```
 
 ## Usage
@@ -41,6 +47,19 @@ You can evaluate expressions in the script engine environment.
 ```py
 print(ScriptEngine.EvalExpression("123")) # 123
 # 123
+```
+You can iterate through Array and Dictionary objects.
+```py
+arr = ScriptEngine.EvalExpression("['test', 'test2']")
+for v in arr:
+	print(v)
+# test
+# test2
+dic = ScriptEngine.EvalExpression("%['test' => 'test2']")
+for v in dic:
+	print(v, dic[v])
+# test
+# test2
 ```
 
 ## License
