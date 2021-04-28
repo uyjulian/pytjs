@@ -327,7 +327,7 @@ public:
 
     py::object PySpecialIter(void)
     {
-        return ToPyList().attr("__iter__");
+        return ToPyList().attr("__iter__")();
     }
 
     py::object PySpecialGetItem(py::object key)
