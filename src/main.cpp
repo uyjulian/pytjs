@@ -7,6 +7,8 @@
 #include "CharacterSet.h"
 #include "DebugIntf.h"
 
+extern void TVPLoadMessage();
+
 #define STRINGIFY(x) #x
 #define MACRO_STRINGIFY(x) STRINGIFY(x)
 
@@ -187,6 +189,10 @@ static void translate_tjs_error(tjs_error hr)
             TJS_eTJSError(TJSNativeClassCrash);
             break;
         default:
+            if (TJS_FAILED(hr))
+            {
+                throw std::runtime_error(std::string(py::str(py::cast(TJSUnknownFailure))));
+            }
             break;
     }
 }
@@ -478,6 +484,7 @@ class tTJSWrapper
 public:
     tTJSWrapper()
     {
+        TVPLoadMessage();
         ScriptEngine = new tTJS();
     }
 
@@ -602,19 +609,19 @@ PYBIND11_MODULE(pytjs, m) {
         }
         catch (const eTJSScriptException &e)
         {
-            PyErr_SetString(PyExc_RuntimeError, std::string(py::str(py::cast(e.GetMessage().AsStdString()))).c_str());
+            throw std::runtime_error(std::string(py::str(py::cast(e.GetMessage().AsStdString()))));
         }
         catch (const eTJSScriptError &e)
         {
-            PyErr_SetString(PyExc_RuntimeError, std::string(py::str(py::cast(e.GetMessage().AsStdString()))).c_str());
+            throw std::runtime_error(std::string(py::str(py::cast(e.GetMessage().AsStdString()))));
         }
         catch (const eTJSError &e)
         {
-            PyErr_SetString(PyExc_RuntimeError, std::string(py::str(py::cast(e.GetMessage().AsStdString()))).c_str());
+            throw std::runtime_error(std::string(py::str(py::cast(e.GetMessage().AsStdString()))));
         }
         catch (const eTJS &e)
         {
-            PyErr_SetString(PyExc_RuntimeError, std::string(py::str(py::cast(e.GetMessage().AsStdString()))).c_str());
+            throw std::runtime_error(std::string(py::str(py::cast(e.GetMessage().AsStdString()))));
         }
     });
 
