@@ -92,6 +92,7 @@ onig = (
         'include_dirs': [
             'external/onig',
             'external/onig/src',
+            'external/onig/src/unicode-7.0',
         ],
     }
 )
