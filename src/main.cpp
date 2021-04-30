@@ -2,10 +2,8 @@
 #include "tjsCommHead.h"
 #include "tjs.h"
 #include "tjsArray.h"
-#include "TextStream.h"
-#include "StorageImpl.h"
+#include "UtilStreams.h"
 #include "CharacterSet.h"
-#include "DebugIntf.h"
 
 extern void TVPLoadMessage();
 

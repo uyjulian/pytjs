@@ -8,32 +8,6 @@ import sys
 
 __version__ = "0.0.7"
 
-zlib = (
-    'zlib',
-    {
-        'sources': [
-            'external/zlib/adler32.c',
-            'external/zlib/compress.c',
-            'external/zlib/crc32.c',
-            'external/zlib/deflate.c',
-            'external/zlib/gzclose.c',
-            'external/zlib/gzlib.c',
-            'external/zlib/gzread.c',
-            'external/zlib/gzwrite.c',
-            'external/zlib/infback.c',
-            'external/zlib/inffast.c',
-            'external/zlib/inflate.c',
-            'external/zlib/inftrees.c',
-            'external/zlib/trees.c',
-            'external/zlib/uncompr.c',
-            'external/zlib/zutil.c',
-        ],
-        'include_dirs': [
-            'external/zlib',
-        ],
-    }
-)
-
 onig = (
     'onig',
     {
@@ -102,10 +76,6 @@ krkr_minimal = (
     {
         'sources' : [
             'src/krkr_minimal/base/CharacterSet.cpp',
-            'src/krkr_minimal/base/StorageIntf.cpp',
-            'src/krkr_minimal/base/XP3Archive.cpp',
-            'src/krkr_minimal/base/TextStream.cpp',
-            'src/krkr_minimal/base/BinaryStream.cpp',
             'src/krkr_minimal/base/UtilStreams.cpp',
             'src/krkr_minimal/msg/android/MsgImpl.cpp',
             'src/krkr_minimal/msg/android/MsgLoad.cpp',
@@ -149,7 +119,6 @@ krkr_minimal = (
             'src/krkr_minimal/tjs2/tjsVariantString.cpp',
             'src/krkr_minimal/tjs2/tjsdate.tab.cpp',
             'src/krkr_minimal/tjs2/tjspp.tab.cpp',
-            'src/krkr_minimal/utils/DebugIntf.cpp',
             'src/krkr_minimal/utils/cp932_uni.cpp',
             'src/krkr_minimal/utils/uni_cp932.cpp',
         ],
@@ -167,27 +136,9 @@ krkr_minimal = (
     }
 )
 
-krkr_minimal[1]['include_dirs'] += zlib[1]['include_dirs']
 krkr_minimal[1]['include_dirs'] += onig[1]['include_dirs']
 
-if sys.platform.startswith('win'):
-    krkr_minimal[1]['sources'] += [
-        'src/krkr_minimal/base/win32/StorageImpl.cpp',
-    ]
-    krkr_minimal[1]['include_dirs'] += [
-        'src/krkr_minimal/base/win32',
-    ]
-    krkr_minimal[1]['macros'] += [
-        ('UNICODE', None),
-        ('_UNICODE', None),
-    ]
-else:
-    krkr_minimal[1]['sources'] += [
-        'src/krkr_minimal/base/android/StorageImpl.cpp',
-    ]
-    krkr_minimal[1]['include_dirs'] += [
-        'src/krkr_minimal/base/android',
-    ]
+if not sys.platform.startswith('win'):
     krkr_minimal[1]['cflags'] += [
         '-std=c++11',
     ]
@@ -223,7 +174,7 @@ setup(
     description="TJS2 interface to Python",
     long_description="",
     ext_modules=ext_modules,
-    libraries=[zlib, onig, krkr_minimal],
+    libraries=[onig, krkr_minimal],
     cmdclass={"build_ext": build_ext_with_custom_flags},
     zip_safe=False,
 )

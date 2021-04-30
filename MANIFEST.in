@@ -1,4 +1,3 @@
-recursive-include external/zlib *.h
 recursive-include external/onig *.h
 recursive-include external/onig/src *.h
 recursive-include external/onig/src/unicode-7.0 *.c
@@ -9,5 +8,3 @@ recursive-include src/krkr_minimal/tjs2 *.h
 recursive-include src/krkr_minimal/tjs2 *.hpp
 recursive-include src/krkr_minimal/tjs2 *.cc
 recursive-include src/krkr_minimal/utils *.h
-recursive-include src/krkr_minimal/base/win32 *.h
-recursive-include src/krkr_minimal/base/android *.h

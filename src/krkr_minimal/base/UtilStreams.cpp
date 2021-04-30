@@ -15,7 +15,6 @@
 #if 0
 #include "DebugIntf.h"
 #include "EventIntf.h"
-#endif
 #include "StorageIntf.h"
 
 
@@ -23,7 +22,6 @@
 
 
 
-#if 0
 //---------------------------------------------------------------------------
 // tTVPLocalTempStorageHolder
 //---------------------------------------------------------------------------
