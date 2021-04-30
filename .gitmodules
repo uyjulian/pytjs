@@ -1,6 +1,3 @@
-[submodule "external/zlib"]
-	path = external/zlib
-	url = https://github.com/krkrz/zlib.git
 [submodule "external/onig"]
 	path = external/onig
 	url = https://github.com/krkrz/oniguruma.git
