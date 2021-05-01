@@ -43,7 +43,8 @@ class iTJSDispatch2WrapperForPython : public tTJSDispatch
             func_to_call = v[ttstr_to_pystr(membername)];
         }
         py::tuple temp_tuple(temp_array);
-        if (result) *result = py_object_to_tjs_variant(func_to_call(*temp_tuple));
+        iTJSDispatch2 *temp_result = py_object_to_tjs_variant(func_to_call(*temp_tuple));
+        if (result) *result = temp_result;
         return TJS_S_OK;
     }
 
@@ -60,7 +61,8 @@ class iTJSDispatch2WrapperForPython : public tTJSDispatch
             func_to_call = v[ttstr_to_pystr(membername)];
         }
         py::tuple temp_tuple(temp_array);
-        if (result) *result = py_object_to_tjs_variant(func_to_call(*temp_tuple));
+        tTJSVariant temp_result = py_object_to_tjs_variant(func_to_call(*temp_tuple));
+        if (result) *result = temp_result;
         return TJS_S_OK;
     }
 
@@ -73,7 +75,8 @@ class iTJSDispatch2WrapperForPython : public tTJSDispatch
         }
         py::object func_to_call = v[py::int_(num)];
         py::tuple temp_tuple(temp_array);
-        if (result) *result = py_object_to_tjs_variant(func_to_call(*temp_tuple));
+        tTJSVariant temp_result = py_object_to_tjs_variant(func_to_call(*temp_tuple));
+        if (result) *result = temp_result;
         return TJS_S_OK;
     }
 
@@ -83,13 +86,15 @@ class iTJSDispatch2WrapperForPython : public tTJSDispatch
         {
             return TJS_E_NOTIMPL;
         }
-        if (result) *result = py_object_to_tjs_variant(v[ttstr_to_pystr(membername)]);
+        tTJSVariant temp_result = py_object_to_tjs_variant(v[ttstr_to_pystr(membername)]);
+        if (result) *result = temp_result;
         return TJS_S_OK;
     }
 
     public: tjs_error TJS_INTF_METHOD PropGetByNum(tjs_uint32 flag, tjs_int num, tTJSVariant *result, iTJSDispatch2 *objthis)
     {
-        if (result) *result = py_object_to_tjs_variant(v[py::int_(num)]);
+        tTJSVariant temp_result = py_object_to_tjs_variant(v[py::int_(num)]);
+        if (result) *result = temp_result;
         return TJS_S_OK;
     }
 
