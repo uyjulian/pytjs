@@ -2,18 +2,31 @@ name: build and publish job
 
 on: push
 
+env:
+  CMAKE_GENERATOR: Ninja
+  HOMEBREW_NO_ANALYTICS: 1
+  HOMEBREW_NO_AUTO_UPDATE: 1
+  HOMEBREW_NO_INSTALL_UPGRADE: 1
+  HOMEBREW_NO_INSTALL_CLEANUP: 1
+  DEBIAN_FRONTEND: noninteractive
+  TZ: Japan
 jobs:
   build-publish:
     name: Build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container:
+      image: ubuntu:18.04
+      options: "--user 0"
 
     steps:
+    - run: apt-get -y update && apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install build-essential git
     - name: checkout repository
-      uses: actions/checkout@master
+      uses: actions/checkout@v4
       with:
         submodules: recursive
     - name: Set up Python 3.7
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v5
       with:
         python-version: 3.7
     - name: Install pypa/build
