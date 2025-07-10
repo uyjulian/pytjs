@@ -20,7 +20,7 @@ jobs:
       options: "--user 0"
 
     steps:
-    - run: apt-get -y update && apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install build-essential git
+    - run: apt-get -y update && apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install build-essential git nodejs
     - name: checkout repository
       uses: actions/checkout@v4
       with:
