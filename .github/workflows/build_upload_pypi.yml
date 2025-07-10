@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     container:
-      image: ubuntu:18.04
+      image: ubuntu:20.04
       options: "--user 0"
 
     steps:
-    - run: apt-get -y update && apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install build-essential git nodejs
+    - run: apt-get -y update && apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install build-essential git
     - name: checkout repository
       uses: actions/checkout@v4
       with:
